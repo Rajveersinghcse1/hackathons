@@ -1,0 +1,36 @@
+﻿# Ignore virtual environments and common artifacts
+.venv/
+venv/
+**/.venv/
+**/venv/
+# Project-specific folder
+/AI Rockfall system(SIH2025)/.venv/
+/AI Rockfall system(SIH2025)/venv/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+ENV/
+.env
+# Jupyter
+.ipynb_checkpoints/
+# OS
+.DS_Store
+Thumbs.db
+# Node
+node_modules/
+# Build/dist
+build/
+dist/
+*.egg-info/
+# VSCode
+.vscode/
+# pipenv
+Pipfile.lock
+# logs
+*.log
+# model weights (optional)
+# yolov8n.pt
