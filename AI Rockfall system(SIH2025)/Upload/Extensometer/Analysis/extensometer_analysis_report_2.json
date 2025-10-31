@@ -1,0 +1,135 @@
+{
+    "report_metadata": {
+        "report_type": "Extensometer Analysis - Landslide Monitoring",
+        "generated_at": "2025-10-25 17:50:40",
+        "analysis_period": {
+            "start": "2025-07-20 11:44:57",
+            "end": "2025-10-17 11:44:57",
+            "duration_days": 89
+        },
+        "total_records": 90
+    },
+    "crack_opening_analysis": {
+        "statistics": {
+            "mean_mm": 1.3046,
+            "median_mm": 1.2153,
+            "std_mm": 0.6364,
+            "min_mm": 0.2708,
+            "max_mm": 2.6852,
+            "cumulative_final_mm": 117.4157
+        },
+        "thresholds": {
+            "warning_level_mm": 0.5,
+            "critical_level_mm": 0.8,
+            "events_above_warning": 84,
+            "events_above_critical": 63
+        }
+    },
+    "crack_dynamics": {
+        "rate_analysis": {
+            "mean_rate_mm_per_day": 0.0237,
+            "max_rate_mm_per_day": 0.3942,
+            "high_rate_events": 0,
+            "critical_rate_events": 0
+        },
+        "acceleration_analysis": {
+            "mean_acceleration": 0.0027,
+            "max_acceleration": 0.531,
+            "positive_accel_events": 43,
+            "high_accel_events": 35
+        },
+        "stability": {
+            "mean_stability_index": 0.4528,
+            "unstable_periods": 5
+        }
+    },
+    "risk_assessment": {
+        "distribution": {
+            "low_risk_count": 10,
+            "medium_risk_count": 10,
+            "high_risk_count": 70,
+            "high_risk_percentage": 77.78
+        },
+        "critical_events": 75
+    },
+    "alert_system": {
+        "total_alerts": 85,
+        "alert_breakdown": {
+            "critical": 70,
+            "warning": 5,
+            "caution": 10
+        }
+    },
+    "spatial_analysis": {
+        "coordinate_ranges": {
+            "x_range": [
+                48.27,
+                131.16
+            ],
+            "y_range": [
+                97.78,
+                161.78
+            ],
+            "z_range": [
+                297.53,
+                341.88
+            ]
+        }
+    },
+    "machine_learning": {
+        "risk_classification_model": {
+            "model_type": "RandomForestClassifier",
+            "accuracy": 94.44,
+            "n_estimators": 100,
+            "max_depth": 10,
+            "top_features": [
+                "crack_rate",
+                "cumulative_crack_opening",
+                "temperature_correction",
+                "crack_opening",
+                "temp_effect"
+            ]
+        },
+        "rate_prediction_model": {
+            "model_type": "GradientBoostingRegressor",
+            "r2_score": -0.0376,
+            "rmse": 0.1239,
+            "mae": 0.1114,
+            "top_features": [
+                "coord_x",
+                "cumulative_crack_opening",
+                "crack_acceleration",
+                "crack_velocity_ma7",
+                "crack_rate"
+            ]
+        }
+    },
+    "statistical_analysis": {
+        "normality_test": {
+            "shapiro_wilk_statistic": 0.9453,
+            "p_value": 0.0009,
+            "is_normal": false
+        },
+        "distribution_metrics": {
+            "skewness": 0.3572,
+            "kurtosis": -1.0573
+        },
+        "pca": {
+            "variance_explained_pc1": 42.74,
+            "variance_explained_pc2": 35.07,
+            "total_variance_explained": 77.81
+        }
+    },
+    "recommendations": [
+        {
+            "priority": "CRITICAL",
+            "message": "Cumulative crack opening exceeds 20mm - Immediate inspection required",
+            "action": "Deploy additional monitoring equipment and consider evacuation protocols"
+        },
+        {
+            "priority": "HIGH",
+            "message": "77.8% of measurements in HIGH risk category",
+            "action": "Increase monitoring frequency to hourly intervals"
+        }
+    ]
+}

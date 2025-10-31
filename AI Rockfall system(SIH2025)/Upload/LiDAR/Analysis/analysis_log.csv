@@ -1,0 +1,3 @@
+run_timestamp,file_name,point_count,x_min,x_max,y_min,y_max,z_min,z_max,z_range,mean_elevation,std_elevation,slope_max,surface_roughness,number_of_clusters,cluster_z_variance_mean,high_risk_voxel_count,elevation_change,slope_direction_mean,curvature_mean,predicted_risk_level
+2025-10-25 19:26:16,RealWorld_OpenPit_Mine.las,30000,0.02,999.88,0.0,999.99,104.97,316.56,211.59,234.846993,36.44630464635088,83.14710489194842,35.91154446950542,2902,2.8397048079707625,726,0.0,178.41754267385804,0.0090724098859817,1.0
+2025-10-25 19:29:36,RealWorld_OpenPit_Mine.las,30000,0.02,999.88,0.0,999.99,104.97,316.56,211.59,234.846993,36.446304646350875,83.14710489194842,35.91154446950542,2902,2.8397048079707625,726,0.0,178.41754267385804,0.00907240988598177,1.0

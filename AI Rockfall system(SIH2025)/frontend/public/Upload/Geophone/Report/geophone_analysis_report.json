@@ -1,0 +1,247 @@
+{
+    "metadata": {
+        "report_title": "Geophone Seismic Monitoring & Rockfall Prediction Report",
+        "generated_date": "2025-10-25 18:36:43",
+        "analysis_period": {
+            "start_date": "2025-04-30 14:27:09",
+            "end_date": "2025-10-26 17:34:27",
+            "duration_days": 179
+        },
+        "total_events": 200,
+        "monitoring_stations": 6
+    },
+    "event_statistics": {
+        "magnitude_statistics": {
+            "vibration_velocity_mms": {
+                "mean": 3.2011469224706253,
+                "std": 5.172381395282994,
+                "min": 0.06779806471571032,
+                "max": 36.16282884871765,
+                "median": 1.5663771558377333
+            },
+            "richter_scale": {
+                "mean": 0.17073348959046034,
+                "std": 0.6214497806016859,
+                "min": -1.4252344291446422,
+                "max": 1.5305358199003707,
+                "median": 0.16653253654810843
+            }
+        },
+        "event_type_distribution": {
+            "Minor Event": 102,
+            "Microseismic": 69,
+            "Moderate Event": 20,
+            "Background Noise": 9
+        },
+        "risk_level_distribution": {
+            "Medium": 102,
+            "Low": 78,
+            "High": 20
+        },
+        "frequency_statistics": {
+            "mean_hz": 142.67167221207475,
+            "std_hz": 135.54457079069087,
+            "range_hz": [
+                5.01789795787528,
+                496.8632059293251
+            ]
+        },
+        "energy_statistics": {
+            "total_energy_joules": 139971143.41865382,
+            "mean_event_energy": 699855.7170932691,
+            "max_event_energy": 12468199.131709645
+        }
+    },
+    "seismic_analysis": {
+        "gutenberg_richter": {
+            "b_value": 0.4963368552809132,
+            "mean_local_b_value": 0.041470980681476435,
+            "std_local_b_value": 0.19632627449050297,
+            "interpretation": "Lower b-values (<0.8) indicate higher stress and increased rockfall risk"
+        },
+        "temporal_patterns": {
+            "mean_inter_event_time_seconds": 77637.573885835,
+            "mean_event_rate_per_hour": 0.17661060811641505,
+            "peak_event_rate": 3.2246671039100283
+        },
+        "spatial_analysis": {
+            "x_range_meters": [
+                27.223337644384618,
+                403.86067327960995
+            ],
+            "y_range_meters": [
+                -156.61536896789733,
+                248.20097298814267
+            ],
+            "depth_range_meters": [
+                7.3950891930857665,
+                77.84004228802021
+            ],
+            "mean_distance_from_center": 242.82300996135316
+        },
+        "clustering": {
+            "dbscan_clusters": 6,
+            "dbscan_noise_points": 0,
+            "kmeans_zones": 5,
+            "zone_risk_analysis": {
+                "zone_1": {
+                    "total_events": 72,
+                    "high_risk_events": 9,
+                    "high_risk_percentage": 12.5
+                },
+                "zone_2": {
+                    "total_events": 25,
+                    "high_risk_events": 2,
+                    "high_risk_percentage": 8.0
+                },
+                "zone_3": {
+                    "total_events": 42,
+                    "high_risk_events": 6,
+                    "high_risk_percentage": 14.285714285714285
+                },
+                "zone_4": {
+                    "total_events": 41,
+                    "high_risk_events": 1,
+                    "high_risk_percentage": 2.4390243902439024
+                },
+                "zone_5": {
+                    "total_events": 20,
+                    "high_risk_events": 2,
+                    "high_risk_percentage": 10.0
+                }
+            }
+        }
+    },
+    "alert_system": {
+        "total_alerts": 196,
+        "alert_level_distribution": {
+            "WARNING": 186,
+            "CRITICAL": 10
+        },
+        "critical_alert_percentage": 5.1020408163265305
+    },
+    "machine_learning": {
+        "risk_classifier": {
+            "model_type": "Random Forest",
+            "accuracy_percentage": 92.0,
+            "n_estimators": 150,
+            "max_depth": 15,
+            "training_samples": 149,
+            "test_samples": 50,
+            "top_features": [
+                {
+                    "feature": "log_energy",
+                    "importance": 0.3951404706703064
+                },
+                {
+                    "feature": "dominant_frequency_hz",
+                    "importance": 0.2533842773044789
+                },
+                {
+                    "feature": "event_magnitude_mms",
+                    "importance": 0.08885312649302804
+                },
+                {
+                    "feature": "peak_ground_accel_g",
+                    "importance": 0.0745216489044786
+                },
+                {
+                    "feature": "magnitude_change",
+                    "importance": 0.052343742194923326
+                },
+                {
+                    "feature": "local_b_value",
+                    "importance": 0.03727331632419448
+                },
+                {
+                    "feature": "time_since_last_event",
+                    "importance": 0.014575956908412456
+                },
+                {
+                    "feature": "event_duration_s",
+                    "importance": 0.011182877415309617
+                },
+                {
+                    "feature": "rolling_mean_magnitude",
+                    "importance": 0.010733489460631249
+                },
+                {
+                    "feature": "event_rate_per_hour",
+                    "importance": 0.010484457799892133
+                }
+            ]
+        },
+        "magnitude_predictor": {
+            "model_type": "Gradient Boosting Regressor",
+            "r2_score": 0.9923099678566768,
+            "rmse": 0.060950651140958524,
+            "n_estimators": 150,
+            "max_depth": 8,
+            "learning_rate": 0.1
+        },
+        "anomaly_detector": {
+            "model_type": "Isolation Forest",
+            "contamination": 0.1,
+            "anomalies_detected": 15
+        }
+    },
+    "files_generated": {
+        "raw_data": "c:\\Users\\rkste\\Desktop\\AI Rockfall Prediction\\Data\\geophone_data.csv",
+        "processed_data": "Analysis folder",
+        "alerts": "Report folder",
+        "models": "Analysis folder (4 model files)",
+        "visualizations": [
+            "images/magnitude_analysis.png",
+            "images/frequency_analysis.png",
+            "3-D/spatial_3d_analysis.png",
+            "3-D/clustering_analysis.png",
+            "images/correlation_analysis.png",
+            "images/alert_system.png",
+            "3-D/interactive_dashboard.html",
+            "images/ml_models.png",
+            "images/comprehensive_dashboard.png"
+        ]
+    },
+    "recommendations": [
+        {
+            "priority": "CRITICAL",
+            "recommendation": "Immediate evacuation protocols should be activated if Richter scale exceeds 2.0",
+            "threshold": "Richter >= 2.0"
+        },
+        {
+            "priority": "HIGH",
+            "recommendation": "Enhanced monitoring required when b-value drops below 0.8 (high stress state)",
+            "threshold": "b-value < 0.8"
+        },
+        {
+            "priority": "HIGH",
+            "recommendation": "Investigate event swarms (>10 events/hour) in specific zones immediately",
+            "threshold": "Event rate > 10/hour"
+        },
+        {
+            "priority": "MEDIUM",
+            "recommendation": "Review and potentially reinforce high-risk zones identified by clustering analysis"
+        },
+        {
+            "priority": "MEDIUM",
+            "recommendation": "Deploy additional sensors in zones with elevated risk scores"
+        },
+        {
+            "priority": "LOW",
+            "recommendation": "Regular calibration of geophones to maintain signal quality above 0.8"
+        }
+    ],
+    "summary": {
+        "overall_risk_status": "LOW",
+        "high_risk_percentage": 10.0,
+        "model_performance": "EXCELLENT",
+        "key_findings": [
+            "Analyzed 200 seismic events over 179 days",
+            "Maximum Richter magnitude: 1.53",
+            "Total seismic energy released: 1.40e+08 Joules",
+            "High/Critical risk events: 20 (10.0%)",
+            "ML classifier achieved 92.0% accuracy in risk prediction",
+            "Generated 196 alerts requiring attention"
+        ]
+    }
+}
