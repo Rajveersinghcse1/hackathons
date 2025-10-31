@@ -1,1 +1,0 @@
-run_timestamp,file_name,point_count,x_min,x_max,y_min,y_max,z_min,z_max,z_range,mean_elevation,std_elevation,slope_max,surface_roughness,number_of_clusters,cluster_z_variance_mean,high_risk_voxel_count,elevation_change,slope_direction_mean,curvature_mean,predicted_risk_level
