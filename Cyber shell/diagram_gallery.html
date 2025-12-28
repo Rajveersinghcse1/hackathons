@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShell Diagram Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0b0f19 0%, #1a1f35 100%);
+            color: #e2e8f0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: rgba(21, 27, 43, 0.8);
+            border-radius: 15px;
+            border: 2px solid #00f2ea;
+            box-shadow: 0 0 30px rgba(0, 242, 234, 0.3);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #00f2ea, #ff0055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .tools-bar {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .tool-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #b026ff, #7c3aed);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(176, 38, 255, 0.3);
+        }
+
+        .tool-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(176, 38, 255, 0.5);
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #00f2ea;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 5px solid #00f2ea;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(21, 27, 43, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #334155;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: #00f2ea;
+            box-shadow: 0 0 25px rgba(0, 242, 234, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            background: #ff0055;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .badge.new {
+            background: #4ade80;
+        }
+
+        .badge.svg {
+            background: #b026ff;
+        }
+
+        .card-meta {
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .card-image {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            margin-bottom: 15px;
+            background: #0b0f19;
+        }
+
+        .card-description {
+            color: #94a3b8;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
+            background: linear-gradient(135deg, #00f2ea, #0ea5e9);
+            border: none;
+            border-radius: 8px;
+            color: #0b0f19;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 242, 234, 0.4);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(135deg, #ff0055, #db2777);
+            color: white;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(21, 27, 43, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #334155;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00f2ea, #b026ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 CyberShell Diagram Gallery</h1>
+            <p class="subtitle">Complete Visual Asset Collection - Competition Ready</p>
+            <div class="tools-bar">
+                <a href="diagram_editor.html" class="tool-btn">🖼️ Open Editor</a>
+                <a href="DIAGRAM_TOOLKIT_README.md" class="tool-btn">📖 Documentation</a>
+                <button class="tool-btn" onclick="downloadAll()">📥 Download All</button>
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">45</div>
+                <div class="stat-label">Total Assets</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">20</div>
+                <div class="stat-label">PNG Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">21</div>
+                <div class="stat-label">SVG Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Style Variants</div>
+            </div>
+        </div>
+
+        <!-- Tech Stack Diagrams -->
+        <div class="section">
+            <h2 class="section-title">📚 Tech Stack Diagrams</h2>
+            <div class="gallery">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Main Tech Stack</div>
+                        <span class="badge">PNG</span>
+                    </div>
+                    <div class="card-meta">Size: 16x11 | 475KB | 300 DPI</div>
+                    <img src="images/tech_stack.png" alt="Tech Stack" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Original 3x2 grid layout with competition badge. Features: AI Engine, Feature Extraction, MITRE ATT&CK, Collector, Privacy, Testing.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/tech_stack.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/tech_stack.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Tech Stack v1</div>
+                        <span class="badge new">NEW</span>
+                    </div>
+                    <div class="card-meta">Size: 16x11 | 457KB | 300 DPI</div>
+                    <img src="images/tech_stack_v1.png" alt="Tech Stack v1" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Enhanced version with improved spacing and professional layout. Includes NEW badges on SHAP and MITRE features.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/tech_stack_v1.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/tech_stack_v1.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Tech Stack Circular</div>
+                        <span class="badge new">NEW</span>
+                    </div>
+                    <div class="card-meta">Size: 16x11 | 209KB | 300 DPI</div>
+                    <img src="images/tech_stack_v2_circular.png" alt="Circular Layout" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Alternative circular layout with central CyberShell core surrounded by 6 modules. Modern and visually striking.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/tech_stack_v2_circular.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/tech_stack_v2_circular.png')">💾 Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Diagrams -->
+        <div class="section">
+            <h2 class="section-title">🏗️ Architecture Diagrams</h2>
+            <div class="gallery">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">System Architecture</div>
+                        <span class="badge">PNG</span>
+                    </div>
+                    <div class="card-meta">Size: 16x9 | 210KB | 300 DPI</div>
+                    <img src="images/system_architecture.png" alt="System Architecture" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Complete data flow with kernel/userland zones. Shows WMI → Collector → Extractor → AI → MITRE pipeline.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/system_architecture.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/system_architecture.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Architecture Flow</div>
+                        <span class="badge new">NEW</span>
+                    </div>
+                    <div class="card-meta">Size: 16x9 | 233KB | 300 DPI</div>
+                    <img src="images/architecture_flow.png" alt="Architecture Flow" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Enhanced flow diagram with labeled connections (Events, Raw Data, Features, Detections). Professional spacing.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/architecture_flow.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/architecture_flow.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Enhanced Architecture</div>
+                        <span class="badge">PNG</span>
+                    </div>
+                    <div class="card-meta">Size: 16x9 | 513KB | 300 DPI</div>
+                    <img src="images/architecture_enhanced.png" alt="Enhanced Architecture" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        World-class features showcase including SHAP explainability, MITRE mapping, performance benchmarks.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/architecture_enhanced.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/architecture_enhanced.png')">💾 Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SVG Architectures -->
+        <div class="section">
+            <h2 class="section-title">🎨 SVG Architecture Styles</h2>
+            <div class="gallery">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Ultra Modern</div>
+                        <span class="badge svg">SVG</span>
+                    </div>
+                    <div class="card-meta">Size: 1600x900 | 8.7KB | Scalable</div>
+                    <img src="images/arch_6_ultra.svg" alt="Ultra Modern" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Competition-ready ultra modern design. Professional spacing, enhanced glow effects, INTERNATIONAL READY badge.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/arch_6_ultra.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/arch_6_ultra.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Cyberpunk Style</div>
+                        <span class="badge svg">SVG</span>
+                    </div>
+                    <div class="card-meta">Size: 1100x650 | 5.8KB | Scalable</div>
+                    <img src="images/arch_1_cyberpunk.svg" alt="Cyberpunk" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Neon gradients and bold colors. Perfect for edgy presentations and hacker-themed materials.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/arch_1_cyberpunk.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/arch_1_cyberpunk.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Blueprint Style</div>
+                        <span class="badge svg">SVG</span>
+                    </div>
+                    <div class="card-meta">Size: 1100x650 | 4.4KB | Scalable</div>
+                    <img src="images/arch_3_blueprint.svg" alt="Blueprint" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Technical blueprint aesthetic. Clean lines and professional appearance for documentation.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/arch_3_blueprint.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/arch_3_blueprint.svg')">💾 Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Presentation Assets -->
+        <div class="section">
+            <h2 class="section-title">📊 Presentation Assets</h2>
+            <div class="gallery">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Problem Statement</div>
+                        <span class="badge">PNG</span>
+                    </div>
+                    <div class="card-meta">Size: 14x7 | 230KB | 300 DPI</div>
+                    <img src="images/problem_statement.png" alt="Problem Statement" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Cloud vs Edge latency comparison. Shows the critical difference: 200ms+ (4,000 files) vs <5ms (<10 files).
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/problem_statement.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/problem_statement.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Measurable Impact</div>
+                        <span class="badge">PNG</span>
+                    </div>
+                    <div class="card-meta">Size: 14x7 | 123KB | 300 DPI</div>
+                    <img src="images/measurable_impact.png" alt="Measurable Impact" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Performance metrics visualization showing real-world impact and improvements.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/measurable_impact.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/measurable_impact.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Performance Comparison</div>
+                        <span class="badge new">NEW</span>
+                    </div>
+                    <div class="card-meta">Size: 16x9 | 158KB | 300 DPI</div>
+                    <img src="images/comparison_chart.png" alt="Comparison" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Side-by-side Cloud vs Edge comparison with "40x FASTER" highlight. Perfect for presentations.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/comparison_chart.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/comparison_chart.png')">💾 Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ultra-Precision Diagrams -->
+        <div class="section">
+            <h2 class="section-title">⚡ Ultra-Precision Diagrams</h2>
+            <div class="gallery">
+                <!-- Data Flow Minimal -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Data Flow - Minimal</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1600x960 | 300 DPI | Perfect Alignment</div>
+                    <img src="images/ultra_precision/data_flow_minimal.png" alt="Data Flow Minimal" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        4-layer data pipeline with precise node alignment. Clean white background with blue accents.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/data_flow_minimal.png')">👁️ PNG</button>
+                        <button class="btn" onclick="window.open('images/ultra_precision/data_flow_minimal.svg')">📄 SVG</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/data_flow_minimal.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Data Flow Technical -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Data Flow - Technical</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1600x960 | 300 DPI | Grid Overlay</div>
+                    <img src="images/ultra_precision/data_flow_technical.png" alt="Data Flow Technical" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Engineering-style with grid overlay and technical annotations. Gray background with sky blue accents.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/data_flow_technical.png')">👁️ PNG</button>
+                        <button class="btn" onclick="window.open('images/ultra_precision/data_flow_technical.svg')">📄 SVG</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/data_flow_technical.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Data Flow Futuristic -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Data Flow - Futuristic</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1600x960 | 300 DPI | Neon Glow</div>
+                    <img src="images/ultra_precision/data_flow_futuristic.png" alt="Data Flow Futuristic" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Dark theme with neon cyan/pink glow effects. Perfect for modern tech presentations.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/data_flow_futuristic.png')">👁️ PNG</button>
+                        <button class="btn" onclick="window.open('images/ultra_precision/data_flow_futuristic.svg')">📄 SVG</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/data_flow_futuristic.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Network Topology Minimal -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Network Topology - Minimal</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1440x1120 | 300 DPI | Security Zones</div>
+                    <img src="images/ultra_precision/network_topology_minimal.png" alt="Network Topology Minimal" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        4-zone security architecture with hexagonal nodes. DMZ, Internal, Secure Enclave, Kernel Space.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/network_topology_minimal.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/network_topology_minimal.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Network Topology Technical -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Network Topology - Technical</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1440x1120 | 300 DPI | Engineering Style</div>
+                    <img src="images/ultra_precision/network_topology_technical.png" alt="Network Topology Technical" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Technical specification style with precise measurements and security protocols labeled.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/network_topology_technical.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/network_topology_technical.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Network Topology Futuristic -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Network Topology - Futuristic</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1440x1120 | 300 DPI | Cyberpunk Theme</div>
+                    <img src="images/ultra_precision/network_topology_futuristic.png" alt="Network Topology Futuristic" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Dark cyberpunk aesthetic with glowing zone boundaries and neon security labels.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/network_topology_futuristic.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/network_topology_futuristic.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Threat Pipeline Minimal -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Threat Detection - Minimal</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1280x1280 | 300 DPI | Circular Layout</div>
+                    <img src="images/ultra_precision/threat_pipeline_minimal.png" alt="Threat Pipeline Minimal" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        8-stage circular detection pipeline with performance metrics. Clean minimal design.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/threat_pipeline_minimal.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/threat_pipeline_minimal.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Threat Pipeline Technical -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Threat Detection - Technical</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1280x1280 | 300 DPI | Process Flow</div>
+                    <img src="images/ultra_precision/threat_pipeline_technical.png" alt="Threat Pipeline Technical" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Technical process diagram with decision nodes and bidirectional arc connectors.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/threat_pipeline_technical.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/threat_pipeline_technical.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Threat Pipeline Futuristic -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Threat Detection - Futuristic</div>
+                        <span class="badge new">ULTRA</span>
+                    </div>
+                    <div class="card-meta">1280x1280 | 300 DPI | AI Powered</div>
+                    <img src="images/ultra_precision/threat_pipeline_futuristic.png" alt="Threat Pipeline Futuristic" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Futuristic AI-powered detection with glowing nodes and cyber-enhanced visual effects.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/threat_pipeline_futuristic.png')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/threat_pipeline_futuristic.png')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Component Architecture Minimal (SVG) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Component Arch - Minimal</div>
+                        <span class="badge">SVG</span>
+                    </div>
+                    <div class="card-meta">1600x1200 | Vector | 4 Layers</div>
+                    <img src="images/ultra_precision/component_architecture_minimal.svg" alt="Component Minimal" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        4-layer component architecture with vertical connectors. Presentation, Business, Data, Infrastructure.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/component_architecture_minimal.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/component_architecture_minimal.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Component Architecture Technical (SVG) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Component Arch - Technical</div>
+                        <span class="badge">SVG</span>
+                    </div>
+                    <div class="card-meta">1600x1200 | Vector | Engineering</div>
+                    <img src="images/ultra_precision/component_architecture_technical.svg" alt="Component Technical" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Engineering-grade layered architecture with precise component alignment and labels.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/component_architecture_technical.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/component_architecture_technical.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Component Architecture Futuristic (SVG) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Component Arch - Futuristic</div>
+                        <span class="badge">SVG</span>
+                    </div>
+                    <div class="card-meta">1600x1200 | Vector | Cyber UI</div>
+                    <img src="images/ultra_precision/component_architecture_futuristic.svg" alt="Component Futuristic" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Dark cyberpunk component stack with neon borders and futuristic styling.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/component_architecture_futuristic.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/component_architecture_futuristic.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Deployment Minimal (SVG) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Deployment - Minimal</div>
+                        <span class="badge">SVG</span>
+                    </div>
+                    <div class="card-meta">1800x1400 | Vector | Hybrid Cloud</div>
+                    <img src="images/ultra_precision/deployment_minimal.svg" alt="Deployment Minimal" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Azure and On-Premise deployment with cross-region connectors. Clean minimal style.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/deployment_minimal.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/deployment_minimal.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Deployment Technical (SVG) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Deployment - Technical</div>
+                        <span class="badge">SVG</span>
+                    </div>
+                    <div class="card-meta">1800x1400 | Vector | Infrastructure</div>
+                    <img src="images/ultra_precision/deployment_technical.svg" alt="Deployment Technical" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Technical deployment diagram with service types, connections, and infrastructure labels.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/deployment_technical.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/deployment_technical.svg')">💾 Download</button>
+                    </div>
+                </div>
+
+                <!-- Deployment Futuristic (SVG) -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Deployment - Futuristic</div>
+                        <span class="badge">SVG</span>
+                    </div>
+                    <div class="card-meta">1800x1400 | Vector | Next-Gen</div>
+                    <img src="images/ultra_precision/deployment_futuristic.svg" alt="Deployment Futuristic" class="card-image" onclick="openModal(this.src)">
+                    <div class="card-description">
+                        Next-generation cloud deployment with glowing connections and futuristic UI elements.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn" onclick="window.open('images/ultra_precision/deployment_futuristic.svg')">👁️ View</button>
+                        <button class="btn secondary" onclick="downloadFile('images/ultra_precision/deployment_futuristic.svg')">💾 Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for full-size view -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        function downloadFile(path) {
+            const a = document.createElement('a');
+            a.href = path;
+            a.download = path.split('/').pop();
+            a.click();
+        }
+
+        function downloadAll() {
+            alert('Tip: Right-click on individual images and select "Save Image As..." to download. Or use the Download button on each card.');
+        }
+    </script>
+</body>
+</html>

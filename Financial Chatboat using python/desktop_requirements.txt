@@ -1,0 +1,19 @@
+# Advanced Financial Desktop Application Requirements
+# All ML models and analysis are built-in, no external APIs required
+
+# Core ML and Data Analysis
+scikit-learn==1.3.2
+pandas==2.0.3
+numpy==1.24.3
+yfinance==0.2.22
+
+# GUI Framework (Built into Python)
+# tkinter - No installation required (comes with Python)
+
+# Optional: Enhanced functionality
+matplotlib==3.7.2
+seaborn==0.12.2
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3

@@ -1,0 +1,14 @@
+EventID,TimeCreated,Image,CommandLine,ParentImage,ParentProcessId,User,ProcessId,DestinationIp,DestinationPort,TargetFilename
+1,2024-01-15 10:00:00,C:\Windows\System32\msiexec.exe,msiexec.exe /i update.msi /quiet,C:\Windows\System32\services.exe,512,SYSTEM,3456,,,
+1,2024-01-15 10:05:00,C:\Windows\System32\svchost.exe,svchost.exe -k DcomLaunch,C:\Windows\System32\services.exe,512,SYSTEM,3457,,,
+1,2024-01-15 10:10:00,C:\Program Files\WindowsApps\Microsoft.WindowsStore\WinStore.App.exe,WinStore.App.exe,C:\Windows\explorer.exe,5678,DOMAIN\user2,4567,,,
+1,2024-01-15 10:15:00,C:\Windows\System32\backgroundTaskHost.exe,backgroundTaskHost.exe,C:\Windows\System32\svchost.exe,3457,SYSTEM,4568,,,
+1,2024-01-15 10:20:00,C:\Program Files\Google\Update\GoogleUpdate.exe,GoogleUpdate.exe /ua /installsource scheduler,C:\Windows\System32\svchost.exe,3457,SYSTEM,4569,,,
+3,2024-01-15 10:25:00,C:\Program Files\WindowsApps\Microsoft.WindowsStore\WinStore.App.exe,,C:\Program Files\WindowsApps\Microsoft.WindowsStore\WinStore.App.exe,4567,DOMAIN\user2,4567,23.218.110.45,443,
+3,2024-01-15 10:30:00,C:\Program Files\Backup\backup.exe,,C:\Program Files\Backup\backup.exe,5678,DOMAIN\admin,5678,52.184.80.100,443,
+3,2024-01-15 10:35:00,C:\Program Files\Google\Update\GoogleUpdate.exe,,C:\Program Files\Google\Update\GoogleUpdate.exe,4569,SYSTEM,4569,142.250.72.206,443,
+11,2024-01-15 10:01:00,C:\Windows\System32\msiexec.exe,,C:\Windows\System32\msiexec.exe,3456,SYSTEM,3456,,,C:\Program Files\App\file1.dll
+11,2024-01-15 10:01:01,C:\Windows\System32\msiexec.exe,,C:\Windows\System32\msiexec.exe,3456,SYSTEM,3456,,,C:\Program Files\App\file2.dll
+11,2024-01-15 10:02:00,C:\Windows\System32\msiexec.exe,,C:\Windows\System32\msiexec.exe,3456,SYSTEM,3456,,,C:\Program Files\App\config.xml
+1,2024-01-15 10:40:00,C:\Windows\System32\RuntimeBroker.exe,RuntimeBroker.exe -Embedding,C:\Windows\System32\svchost.exe,3457,SYSTEM,5789,,,
+1,2024-01-15 10:45:00,C:\Windows\System32\SearchIndexer.exe,SearchIndexer.exe /Embedding,C:\Windows\System32\services.exe,512,SYSTEM,5890,,,

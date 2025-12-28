@@ -1,0 +1,17 @@
+timestamp,host_hash,is_malicious,attack_type,attack_start_time
+2024-01-15T14:00:00,host_victim,false,benign,
+2024-01-15T14:00:30,host_victim,true,lolbin,2024-01-15T14:00:30
+2024-01-15T14:01:00,host_victim,true,c2,2024-01-15T14:00:30
+2024-01-15T14:02:00,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:05,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:10,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:15,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:20,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:25,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:30,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:02:35,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:03:00,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:04:00,host_victim,true,ransomware,2024-01-15T14:02:00
+2024-01-15T14:05:00,host_victim,true,exfil,2024-01-15T14:02:00
+2024-01-15T14:10:00,host_victim,true,lateral,2024-01-15T14:02:00
+2024-01-15T14:10:05,host_victim,true,lateral,2024-01-15T14:02:00

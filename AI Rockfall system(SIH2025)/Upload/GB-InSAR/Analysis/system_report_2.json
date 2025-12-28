@@ -1,0 +1,60 @@
+{
+    "generation_time": "2025-10-25 18:01:12",
+    "data_statistics": {
+        "total_records": 62,
+        "date_range": "2025-09-18 10:25:41.506095 to 2025-10-17 22:36:23.332123",
+        "monitoring_points": 62,
+        "risk_distribution": {
+            "Medium": 39,
+            "Low": 18,
+            "High": 5
+        }
+    },
+    "model_performance": {
+        "random_forest": {
+            "accuracy": 1.0,
+            "f1_score": 1.0,
+            "model_path": "c:\\Users\\rkste\\Desktop\\AI Rockfall Prediction\\Upload\\GB-InSAR\\Analysis\\random_forest_model.joblib"
+        },
+        "gradient_boosting": {
+            "r2_score": 0.999999999293339,
+            "model_path": "c:\\Users\\rkste\\Desktop\\AI Rockfall Prediction\\Upload\\GB-InSAR\\Analysis\\gradient_boosting_model.joblib"
+        }
+    },
+    "feature_importance": [
+        {
+            "feature": "displacement",
+            "importance": 0.4321432526533404
+        },
+        {
+            "feature": "cumulative_displacement",
+            "importance": 0.22282611391322185
+        },
+        {
+            "feature": "daily_displacement_change",
+            "importance": 0.16690455432665222
+        },
+        {
+            "feature": "acceleration_ratio",
+            "importance": 0.05774708824972028
+        },
+        {
+            "feature": "displacement_rate",
+            "importance": 0.05319875686144677
+        },
+        {
+            "feature": "displacement_acceleration",
+            "importance": 0.03644843440955052
+        },
+        {
+            "feature": "slope_angle",
+            "importance": 0.030731799586067983
+        }
+    ],
+    "current_alerts": 3,
+    "high_risk_locations": [
+        "63.64, 31.44",
+        "37.46, 62.59",
+        "56.19, 23.86"
+    ]
+}

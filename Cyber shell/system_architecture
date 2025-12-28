@@ -1,0 +1,49 @@
+// CyberShell System Design
+digraph CyberShell_Architecture {
+	bgcolor="#0E1117"
+	rankdir=LR
+	splines=ortho
+	pad=0.5
+	fontname="Segoe UI"
+	fontsize=20
+	fontcolor=white
+	label="CyberShell: Autonomous Edge-Native Defense Architecture"
+	node [fontname="Segoe UI" fontsize=12 margin=0.2 penwidth=2 shape=box style="filled,rounded"]
+	edge [arrowsize=1.0 color="#00f3ff" fontcolor="#00f3ff" fontname="Segoe UI" fontsize=10 penwidth=2]
+	subgraph cluster_kernel {
+		color="#ff003c" fontcolor="#ff003c" label="Windows Kernel (Ring 0)" style=dashed
+		WMI [label="📡 WMI Provider
+(Win32_Process)" color="#ff003c" fillcolor="#2d3436" fontcolor=white shape=component]
+	}
+	subgraph cluster_userland {
+		color="#00ff41" fontcolor="#00ff41" label="CyberShell Userland (Ring 3) - Safe Execution"
+		Collector [label="🕵️ Async Collector
+(Event Subscription)" color="#00ff41" fillcolor="#2d3436" fontcolor=white]
+		Hasher [label="🔒 Privacy Vault
+(SHA-256 Hashing)" color="#fab1a0" fillcolor="#2d3436" fontcolor=white shape=shield]
+		Extractor [label="⚙️ Feature Extractor
+(Entropy, Vectors)" color="#74b9ff" fillcolor="#2d3436" fontcolor=white]
+		subgraph cluster_brain {
+			color="#a29bfe" fontcolor="#a29bfe" label="Neuro-Symbolic Core"
+			ML [label="🧠 IsolationForest
+(Anomaly Detection)" color="#a29bfe" fillcolor="#6c5ce7" fontcolor=white]
+			Rules [label="📜 Rule Engine
+(Deterministic)" color="#74b9ff" fillcolor="#0984e3" fontcolor=white]
+			Scorer [label="⚖️ Hybrid Scorer
+(Weighted Aggregation)" color="#ff7675" fillcolor="#d63031" fontcolor=white shape=diamond]
+		}
+		UI [label="🖥️ Streamlit UI
+(Reactive Command Center)" color="#fdcb6e" fillcolor="#2d3436" fontcolor=white shape=folder]
+		Action [label="⚡ Active Defense
+(Terminate Process)" color="#ff003c" fillcolor="#d63031" fontcolor=white shape=octagon]
+	}
+	WMI -> Collector [label=" Async Event (Push)"]
+	Collector -> Hasher [label=" Raw Data"]
+	Hasher -> Extractor [label=" Anonymized Data"]
+	Extractor -> ML [label=" Vectors"]
+	Extractor -> Rules [label=" Metadata"]
+	ML -> Scorer [label=" Score"]
+	Rules -> Scorer [label=" Flag"]
+	Scorer -> UI [label=" Alert"]
+	Scorer -> Action [label=" High Conf."]
+}

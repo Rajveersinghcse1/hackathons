@@ -1,0 +1,11 @@
+timestamp,host_hash,is_malicious,attack_type,attack_start_time
+2024-01-15T09:00:00,host_demo1,false,benign,
+2024-01-15T09:05:00,host_demo1,false,benign,
+2024-01-15T09:10:00,host_demo1,false,benign,
+2024-01-15T09:15:00,host_demo1,false,benign,
+2024-01-15T09:20:00,host_demo1,false,benign,
+2024-01-15T09:30:00,host_demo1,false,benign,
+2024-01-15T09:35:00,host_demo1,false,benign,
+2024-01-15T09:40:00,host_demo1,false,benign,
+2024-01-15T09:45:00,host_demo1,false,benign,
+2024-01-15T09:50:00,host_demo1,false,benign,

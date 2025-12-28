@@ -1,0 +1,24 @@
+# YOLOv8 Space Station Object Detection Dataset Configuration
+# Save this as data/dataset.yaml
+
+path: ./data
+train: train/images
+val: val/images
+
+# Number of classes
+nc: 3
+
+# Class names (must match the order in your label files)
+names: ['Toolbox', 'Oxygen Tank', 'Fire Extinguisher']
+
+# Optional: Download script (if using online dataset)
+# download: |
+#   # Add your download script here if needed
+
+# Additional configuration for better training
+roboflow:
+  workspace: space-station-detection
+  project: space-objects
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/space-station-detection/space-objects/dataset/1

@@ -1,0 +1,202 @@
+// Prisma Schema for CampusFixIt
+// PostgreSQL with PostGIS for geospatial data
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis, uuidOssp(map: "uuid-ossp")]
+}
+
+// User roles enum
+enum Role {
+  CITIZEN
+  STAFF
+  ADMIN
+}
+
+// Issue status lifecycle
+enum IssueStatus {
+  OPEN
+  ACKNOWLEDGED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  ESCALATED
+}
+
+// Issue priority levels
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+// Issue categories for rural infrastructure
+enum Category {
+  ROADS
+  WATER
+  ELECTRICITY
+  SANITATION
+  AGRICULTURE
+  HEALTH
+  EDUCATION
+  OTHER
+}
+
+// Users table
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  name          String
+  role          Role     @default(CITIZEN)
+  department    String?
+  phone         String?
+  avatarUrl     String?  @map("avatar_url")
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  reportedIssues  Issue[]         @relation("Reporter")
+  assignedIssues  Issue[]         @relation("Assignee")
+  upvotes         Upvote[]
+  comments        Comment[]
+  activityLogs    ActivityLog[]
+
+  @@map("users")
+}
+
+// Issues table - core entity
+model Issue {
+  id          String      @id @default(uuid())
+  title       String
+  description String?
+  category    Category
+  priority    Priority    @default(MEDIUM)
+  status      IssueStatus @default(OPEN)
+
+  // Location data
+  latitude    Float
+  longitude   Float
+  building    String?
+  floor       String?
+  room        String?
+  locationDescription String? @map("location_description")
+
+  // Photo evidence
+  photoUrl       String   @map("photo_url")
+  resolvedPhotoUrl String? @map("resolved_photo_url")
+
+  // Timestamps
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  acknowledgedAt DateTime? @map("acknowledged_at")
+  resolvedAt  DateTime? @map("resolved_at")
+  escalatedAt DateTime? @map("escalated_at")
+
+  // Escalation tracking
+  escalationLevel Int @default(0) @map("escalation_level")
+
+  // Relations
+  reporterId  String    @map("reporter_id")
+  reporter    User      @relation("Reporter", fields: [reporterId], references: [id])
+  
+  assigneeId  String?   @map("assignee_id")
+  assignee    User?     @relation("Assignee", fields: [assigneeId], references: [id])
+
+  upvotes       Upvote[]
+  comments      Comment[]
+  activityLogs  ActivityLog[]
+
+  @@index([status])
+  @@index([category])
+  @@index([createdAt])
+  @@index([reporterId])
+  @@index([assigneeId])
+  @@map("issues")
+}
+
+// Upvotes for issue prioritization
+model Upvote {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  issueId   String   @map("issue_id")
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, issueId])
+  @@map("upvotes")
+}
+
+// Comments on issues
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  issueId   String   @map("issue_id")
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+
+  @@index([issueId])
+  @@map("comments")
+}
+
+// Activity log for accountability
+model ActivityLog {
+  id          String   @id @default(uuid())
+  action      String   // e.g., "STATUS_CHANGED", "ASSIGNED", "COMMENTED"
+  details     Json?    // Additional context
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id])
+
+  issueId     String   @map("issue_id")
+  issue       Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+
+  @@index([issueId])
+  @@index([createdAt])
+  @@map("activity_logs")
+}
+
+// Buildings/Locations for 3D map
+model Building {
+  id          String   @id @default(uuid())
+  name        String
+  code        String   @unique // e.g., "CSE", "ISE", "LIBRARY"
+  latitude    Float
+  longitude   Float
+  floors      Int      @default(1)
+  modelUrl    String?  @map("model_url") // 3D model file
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("buildings")
+}
+
+// Statistics cache for dashboard
+model DailyStats {
+  id            String   @id @default(uuid())
+  date          DateTime @db.Date
+  totalIssues   Int      @default(0) @map("total_issues")
+  resolvedIssues Int     @default(0) @map("resolved_issues")
+  avgResolutionHours Float? @map("avg_resolution_hours")
+  categoryStats Json?    @map("category_stats")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@unique([date])
+  @@map("daily_stats")
+}

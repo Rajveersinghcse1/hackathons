@@ -1,0 +1,47 @@
+{
+    "system_name": "Piezometer Landslide Prediction System",
+    "report_generated": "2025-10-25 20:01:40",
+    "data_statistics": {
+        "total_readings": 64,
+        "monitoring_points": 62,
+        "date_range": {
+            "start": "2025-09-18 10:51:10.920603",
+            "end": "2025-10-25 07:50:47.627867"
+        },
+        "pore_pressure": {
+            "min": 37.83725493653199,
+            "max": 78.44517978696231,
+            "mean": 58.49252739899559,
+            "std": 7.8627692382832945
+        },
+        "groundwater_level": {
+            "min": 1.7611276110353469,
+            "max": 5.886002840236152,
+            "mean": 3.7503078125913083,
+            "std": 0.9632420230432814
+        },
+        "risk_distribution": {
+            "Medium": 31,
+            "Low": 19,
+            "High": 14
+        }
+    },
+    "model_performance": {
+        "classification_model": {
+            "type": "RandomForestClassifier",
+            "accuracy": 1.0,
+            "f1_score": 1.0
+        },
+        "regression_model": {
+            "type": "GradientBoostingRegressor",
+            "r2_score": 0.9946824745975902
+        }
+    },
+    "top_features": {
+        "pore_pressure": 0.4221971486466335,
+        "cumulative_pressure_change": 0.3612990806605606,
+        "pressure_water_ratio": 0.05733091437530828,
+        "pressure_change_rate": 0.04451940022723642,
+        "coord_z": 0.03574315992904447
+    }
+}

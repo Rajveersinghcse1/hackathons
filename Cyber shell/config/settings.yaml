@@ -1,0 +1,26 @@
+# CyberShell Configuration
+# ========================
+# Safe defaults for hackathon demo
+
+collection:
+  sysmon: true           # Read Sysmon EVTX/CSV
+  pcap: true             # Read PCAP files
+  wmi: false             # Disabled - live collection
+  eventlog: true         # Read Event Log exports
+  live_mode: false       # IMPORTANT: Keep false for demos
+
+privacy:
+  hash_all_identifiers: true    # Hash usernames, IPs, hostnames
+  strip_command_args: false     # Keep for LOLBin detection
+  aggregate_only: false         # Keep event-level detail
+
+detection:
+  threshold: 50          # Alert threshold (0-100)
+  rule_weight: 0.6       # Weight for rule-based detection
+  ml_weight: 0.4         # Weight for ML anomaly detection
+  model_path: model/model.pkl
+
+ui:
+  simulate_mode: true    # IMPORTANT: Keep true for demos
+  replay_sandbox: true   # Use packaged data only
+  auto_refresh_seconds: 30

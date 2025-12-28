@@ -1,0 +1,50 @@
+# Ignore compiled Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Ignore virtual environments
+venv/
+.venv/
+ENV/
+
+# Ignore IDE settings
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore sensitive files
+.cybershell_salt
+.hash_mapping.json
+*.env
+.env.*
+
+# Ignore data files (too large for git)
+*.pcap
+*.evtx
+*.raw
+
+# Keep sample data structure but ignore large files
+scenarios/data/**/*.pcap
+scenarios/data/**/*.evtx
+
+# Ignore model files (should be trained locally)
+model/model.pkl
+model/scaler.pkl
+
+# Ignore output files
+scenarios/output/
+*.jsonl
+metrics_report.csv
+metrics_report.json
+action_log.json
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+desktop.ini

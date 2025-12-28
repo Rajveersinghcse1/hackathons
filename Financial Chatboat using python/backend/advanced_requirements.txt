@@ -1,0 +1,22 @@
+# Advanced Financial Assistant Requirements
+# Comprehensive ML-based financial analysis without external APIs
+
+# Core FastAPI and web framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# Machine Learning Libraries
+scikit-learn==1.3.2
+numpy==1.24.3
+scipy==1.11.4
+
+# Data Processing
+pandas==2.0.3
+
+# Database
+sqlite3  # Built into Python
+
+# Utilities
+python-dotenv==1.0.0
